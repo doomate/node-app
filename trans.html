@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper-container {
+        display: flex;
+      }
+      .container1 {
+        background-color: orangered;
+        width: 400px;
+        aspect-ratio: 1/1;
+        transition: all 0.5s;
+        position: relative;
+      }
+
+      .container2 {
+        width: 400px;
+        aspect-ratio: 1/1;
+        border: 1px solid black;
+        transition: all 0.5s;
+      }
+
+      .trans {
+        transform: translate(347px);
+      }
+      .trans2 {
+        transform: translate(-347px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper-container">
+      <div class="container1">
+        <button class="btn1">click me</button>
+      </div>
+      <div class="container2">
+        <button class="btn2">click me</button>
+      </div>
+    </div>
+
+    <script>
+      const btn1 = document.querySelector(".btn1");
+      const box1 = document.querySelector(".container1");
+      const box2 = document.querySelector(".container2");
+
+      btn1.addEventListener("click", () => {
+        console.log("we good");
+        let dimen = box1.getBoundingClientRect();
+        let dimenWidth = dimen.width + "px";
+        console.log(dimenWidth);
+        box2.style.background = "purple";
+        box1.style.webkitTransform = "translate(dimenWidth)";
+        // box1.classList.toggle("trans");
+        // box2.classList.toggle("trans2");
+      });
+    </script>
+  </body>
+</html>

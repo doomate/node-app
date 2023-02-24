@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
+        color: white;
+      }
+
+      .location,
+      .temperature {
+        height: 30vh;
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .temperature {
+        flex-direction: column;
+      }
+
+      .degree-section {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .degree-section span {
+        margin: 10px;
+        font-size: 30px;
+      }
+      .degree-section h2 {
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="location">
+      <h1 class="location-timezone">timezone</h1>
+      <p>Icon</p>
+    </div>
+    <div class="temperature">
+      <div class="degree-section">
+        <h2 class="temperature-degree">34</h2>
+        <span>F</span>
+      </div>
+      <div class="temperature-description">its friggin cold</div>
+    </div>
+
+    <script>
+      function loca() {
+        let arr = [];
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position.coords.longitude, position.coords.latitude);
+          arr.push(position.coords.longitude);
+
+          arr.push(position.coords.latitude);
+        });
+      }
+
+      loca();
+
+      const weatherRes = function (city) {
+        return fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=bf5f628b0e61ca3e51cb457b304a8ee5`
+        );
+      };
+
+      weatherRes("new york")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
+    </script>
+  </body>
+</html>

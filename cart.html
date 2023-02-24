@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+
+    <style>
+      .shop-content {
+        border: 1px solid black;
+        width: 230px;
+        padding: 20px;
+        border-radius: 8px;
+        background: black;
+        color: white;
+        text-align: center;
+      }
+
+      .wrapper {
+        display: grid;
+        grid-template-columns: 230px 230px;
+        justify-content: space-between;
+        width: 50%;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn1">click1</button>
+    <button class="btn1">click2</button>
+    <p class="count"></p>
+    <div class="wrapper"></div>
+
+    <script>
+      const btn1 = document.querySelectorAll(".btn1");
+      const count = document.querySelector(".count");
+      const wrapper = document.querySelector(".wrapper");
+      let counter = 0;
+
+      btn1.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          counter++;
+          count.innerHTML = counter;
+          console.log("we good");
+        });
+      });
+
+      let basket = [];
+
+      const arr = [
+        {
+          id: "gtju",
+          title: "male session",
+          text: "Lorem ipsum dolor sit amet consectetur",
+          price: "$" + 30,
+        },
+
+        {
+          id: "htyu",
+          title: "female session",
+          text: "Lorem ipsum dolor sit amet consectetur",
+          price: "$" + 40,
+        },
+      ];
+
+      const createContent = function (arrs) {
+        arrs.forEach((element) => {
+          let { id, title, price, text } = element;
+          const html = `
+            <div id=product-id-${id} class="shop-content">
+      <h2>${title}</h2>
+      <p>${text}</p>
+      <p>${price}</p>
+      <i onclick='increment(${id})'class="fa-solid fa-plus"></i>
+      <div id=${id} class="qauntity">0</div>
+      <i class="fa-solid fa-minus"></i>
+    </div>
+
+            `;
+          wrapper.insertAdjacentHTML("beforeend", html);
+        });
+      };
+
+      createContent(arr);
+
+      const increment = function (id) {
+        console.log(id);
+        //let selectedItem = id;
+        // let search = basket.find((x) => {
+        //   return x.id === selectedItem.id;
+        // });
+
+        // if (search === undefined) {
+        //   basket.push({
+        //     id: selectedItem.id,
+        //     item: 1,
+        //   });
+        // } else {
+        //   search.item += 1;
+        // }
+        // console.log(basket);
+      };
+    </script>
+  </body>
+</html>

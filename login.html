@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 500px;
+        height: 500px;
+        padding: 10px;
+        overflow: scroll;
+        border: 1px solid black;
+        margin-top: 20px;
+        margin: auto;
+      }
+
+      .name {
+        font-size: large;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+      <p>
+        <label for="">Name</label>
+        <input type="text" class="name" />
+      </p>
+
+      <p>
+        <label for="">Email</label>
+        <input type="email" class="email" />
+      </p>
+
+      <p>
+        <label for="">Password</label>
+        <input type="text" maxlength="7" minlength="5" class="password" />
+      </p>
+
+      <button class="btn">submit</button>
+    </form>
+
+    <div class="container"></div>
+
+    <script>
+      const name = document.querySelector(".name");
+      const email = document.querySelector(".email");
+      const password = document.querySelector(".password");
+      const btn = document.querySelector(".btn");
+      const container = document.querySelector(".container");
+
+      let arr = JSON.parse(localStorage.getItem("obj")) || [];
+
+      if (localStorage.getItem("obj")) {
+        arr.forEach((element) => {
+          createMakup(element);
+        });
+      }
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const obj = {
+          data1: name.value,
+          data2: email.value,
+          data3: password.value,
+        };
+        arr.push(obj);
+        createMakup(obj);
+        localStorage.setItem("obj", JSON.stringify(arr));
+        name.value = "";
+        email.value = "";
+        password.value = "";
+      });
+
+      function createMakup(datas) {
+        const html = `
+            <div class="wrapper">
+                    <p class="name"> my name is ${datas.data1}</p>
+                </div>
+        `;
+        container.insertAdjacentHTML("beforeend", html);
+      }
+    </script>
+  </body>
+</html>

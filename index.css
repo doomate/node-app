@@ -1,0 +1,33 @@
+.nav-bar li {
+  list-style: none;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-area {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px auto 0 auto;
+  border: 1px solid black;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 52px;
+}
+
+.nav-container {
+  width: 50%;
+}
+
+.nav-area h3 {
+  font-size: 30px;
+}
+
+.main-content {
+}

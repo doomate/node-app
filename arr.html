@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+      }
+      .deposite {
+        margin-top: 10rem;
+        margin-right: 10rem;
+        border: 1px solid green;
+        height: 150px;
+        padding: 10px;
+      }
+      .movements {
+        width: 31rem;
+        height: 31rem;
+        border: 1px solid black;
+        margin: 10rem;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .movements-style {
+        width: 30rem;
+      }
+      .wrapper-content {
+        display: flex;
+        justify-content: space-between;
+        margin: 0px 10px 10px 10px;
+        width: 100%;
+      }
+      .mov {
+        margin-left: 20px;
+      }
+
+      .move__withdraw {
+        background-color: red;
+      }
+      .move__deposite {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="movements"></div>
+      <div class="deposite">
+        <input type="number" class="depo" />
+        <button type="submit" class="btn">deposite</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const movements = document.querySelector(".movements");
+    const btn = document.querySelector(".btn");
+    const depo = document.querySelector(".depo");
+
+    const transfers = [5000, -4500, 700, 589, -780];
+
+    btn.addEventListener("click", () => {
+      let val = Number(depo.value);
+      let aval = 2000;
+      transfers.push(val);
+      aval = aval + val;
+      console.log(val);
+      console.log(aval);
+      depo.value = "";
+    });
+
+    console.log(transfers);
+    // transfers.forEach((trans) => {
+    //   let data = document.createElement("h4");
+    //   let transType = document.createElement("p");
+    //   if (trans > 0) {
+    //     transType.textContent = "Deposite";
+    //   } else {
+    //     transType.textContent = "withdrawal";
+    //   }
+    //   data.textContent = trans;
+
+    //   data.classList.add("movements-style");
+    //   movements.appendChild(data);
+    //   data.appendChild(transType);
+    // });
+
+    function motions(trans) {
+      trans.forEach((mov, i) => {
+        const type = mov > 0 ? "deposite" : "withdraw";
+        const html = `
+             <div class='wrapper-content'>
+                 <div class='move__${type}'>${i + 1} ${type}</div>
+                <div class='mov'>${mov}</div>
+                 </div>
+            `;
+        movements.insertAdjacentHTML("afterbegin", html);
+        console.log(mov);
+      });
+    }
+    motions(transfers);
+
+    function checkDogs(data1, data2) {
+      let realData = data1.slice();
+      let workData = realData.slice(1, -1);
+      let totalArr = workData.concat(data2);
+      totalArr.forEach((dats, i) => {
+        if (dats >= 3) {
+          console.log(`dog number ${i + 1} is an adult`);
+        } else {
+          console.log(`dog number ${i + 1} is a puppy`);
+        }
+      });
+    }
+
+    checkDogs([2, 4, 67, 5, 8], [34, 45]);
+
+    // const calAverageHumanAge = function (dogArr) {
+    //   let humanAge = dogArr.map((dogAge) => {
+    //     if (dogAge <= 2) {
+    //       return dogAge * 2;
+    //     } else {
+    //       return 16 + dogAge * 4;
+    //     }
+    //   });
+
+    //   let exAge = humanAge.filter((ages) => {
+    //     return ages >= 18;
+    //   });
+
+    //   let averageAge = exAge.reduce((accum, mov) => {
+    //     return accum + mov;
+    //   }, 0);
+
+    //   calAverage = averageAge / exAge.length;
+    //   console.log(calAverage);
+    // };
+
+    const calAverageHumanAge = (dogArr) => {
+      let humanAge = dogArr
+        .map((dogAge) => {
+          return dogAge <= 2 ? dogAge * 2 : 16 + dogAge * 4;
+        })
+        .filter((ages) => {
+          return ages >= 18;
+        })
+        .reduce((acc, mov, i, arr) => {
+          return acc + mov / arr.length;
+        }, 0);
+      console.log(humanAge);
+    };
+
+    calAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+    calAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+    const getInit = function (str) {
+      let sp = str.split(" ");
+      return `${sp[0][0]}${sp[1][0]}`;
+    };
+
+    let outCome = getInit("james browns");
+    console.log(outCome);
+  </script>
+</html>
